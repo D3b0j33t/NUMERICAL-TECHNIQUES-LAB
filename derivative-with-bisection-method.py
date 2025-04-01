@@ -7,13 +7,13 @@ def bisection_method(func, a, b, tolerance=1e-7, max_iter=100):
 
     iteration = 0
     while (b - a) / 2 > tolerance and iteration < max_iter:
-        c = (a + b) / 2  # Midpoint
-        if func(c) == 0:  # Exact root found
+        c = (a + b) / 2
+        if func(c) == 0:
             return c, iteration, (b - a) / 2
-        (b, a) = (c, a) if func(c) * func(a) < 0 else (b, c)  # Update interval
+        (b, a) = (c, a) if func(c) * func(a) < 0 else (b, c)
         iteration += 1
 
-    return (a + b) / 2, iteration, (b - a) / 2  # Return root, iterations, error bound
+    return (a + b) / 2, iteration, (b - a) / 2
 
 def central_difference_derivative(func, x, h=1e-5):
     return (func(x + h) - func(x - h)) / (2 * h)
@@ -33,7 +33,7 @@ def find_interval_for_bisection(func, x_start=-10, x_end=10, step_size=0.1):
     print("No sign change found within the specified range.")
     return None, None
 
-if __name__ == "__main__":
+def main():
     equation_str = input("Enter the equation (in terms of x, e.g., 'x**3 + x**2 + x + 7', 'sin(x)', 'log(x)'):\n> ")
     func = parse_function(equation_str)
 
@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     if a is not None and b is not None:
         print(f"Found suitable interval for bisection method: [{a}, {b}]")
-        tolerance = float(input("Enter the desired tolerance (e.g., 0.1e-3): "))
+        tolerance = float(input("Enter the desired tolerance (e.g., 0.1e-3): ") or 0.1e-3)
         root, iterations, error_bound = bisection_method(func, a, b, tolerance)
 
         if root is not None:
@@ -54,3 +54,6 @@ if __name__ == "__main__":
         print(f"The numerical derivative of the function at x = {x_point} is approximately: {derivative:.6f}")
     else:
         print("Couldn't find a suitable interval for the Bisection Method.")
+
+if __name__ == "__main__":
+main()

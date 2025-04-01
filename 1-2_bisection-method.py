@@ -39,23 +39,44 @@ def find_interval_for_bisection(func, x_start=-10, x_end=10, step_size=0.1):
 
 # Main program execution
 if __name__ == "__main__":
+    print("Welcome to the Bisection Method Solver")
+    
+    # Get the function from the user
     equation_str = input("Enter the equation function f(x): (e.g., 'x**3 + x**2 + x + 7'): ")
     func = parse_function(equation_str)
     
-    a, b = find_interval_for_bisection(func)
+    # Menu system to choose interval
+    print("\nChoose how to determine the interval:")
+    print("1. Input interval manually")
+    print("2. Automatically find interval")
+    choice = input("Enter your choice (1 or 2): ").strip()
     
-    # Ternary operation to check if suitable interval is found
-    if a is not None and b is not None:
+    if choice == '1':
+        # User inputs the interval manually
+        a = float(input("Enter the start of the interval (a): "))
+        b = float(input("Enter the end of the interval (b): "))
+        if func(a) * func(b) >= 0:
+            print("The bisection method cannot be applied because the signs of f(a) and f(b) are not opposite.")
+            exit()
+    elif choice == '2':
+        # Automatically find the interval
+        a, b = find_interval_for_bisection(func)
+        if a is None or b is None:
+            print("Couldn't find a suitable interval for the Bisection Method.")
+            exit()
         print(f"Found suitable interval for bisection method: [{a}, {b}]")
-        
-        tolerance = float(input("Enter the desired tolerance (e.g., 0.1e-3): ") or 0.1e-3)
-        
-        root, iterations, error_bound = bisection_method(func, a, b, tolerance)
-        
-        # Displaying the results
-        if root is not None:
-            print(f"Root found using Bisection Method: {root:.4f}")
-            print(f"Number of iterations: {iterations}")
-            print(f"Error bound: {error_bound:.6f}")
     else:
-        print("Couldn't find a suitable interval for the Bisection Method.")
+        print("Invalid choice. Exiting program.")
+        exit()
+    
+    # Ask for tolerance
+    tolerance = float(input("Enter the desired tolerance (e.g., 0.1e-3): ") or 0.1e-3)
+    
+    # Perform the Bisection Method
+    root, iterations, error_bound = bisection_method(func, a, b, tolerance)
+    
+    # Display the results
+    if root is not None:
+        print(f"\nRoot found using Bisection Method: {root:.4f}")
+        print(f"Number of iterations: {iterations}")
+        print(f"Error bound: {error_bound:.6f}")

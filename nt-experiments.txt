@@ -1,0 +1,37 @@
+Implementation using Python
+
+1-2
+
+To find the roots of the equation by bisection method
+
+3-4
+
+To find the roots of the equation by secant Regula False method
+
+5-6
+
+To find the roots of the equation by Newton's method
+
+7-8
+
+To find the solution of a system of nonlinear equation by using Newton's method
+
+9-10
+
+To find the solution of tri-diagonal system by using Gauss Thomas method
+
+11-12
+
+To find the solution of a system of equations by using Jacobi/Gauss-Seidel method
+
+13-14
+
+To find the cubic spine interpolating function
+
+15-16
+
+To evaluate the approximate value of finite integrals using Gaussian/Romberg integration
+
+17-18
+
+To solve the boundary value problem using finite difference method
